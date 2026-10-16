@@ -1,0 +1,1 @@
+"""Japan Geospatial Open Data MCP Ecosystem — GSI + e-Stat server package."""
