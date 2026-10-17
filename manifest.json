@@ -1,0 +1,48 @@
+{
+  "manifest_version": "0.4",
+  "name": "japan-geospatial-open-data-mcp",
+  "display_name": "Japan Geospatial Open Data MCP",
+  "version": "1.0.0",
+  "description": "Japan geospatial MCP: GSI tiles, e-Stat stats, MLIT school districts for real-estate analysis.",
+  "long_description": "# japan-geospatial-open-data-mcp\n\n日本全国規模のジオスパティアル・オープンデータを AI エージェントに届ける MCP Server。\nGSI 地理院タイル・地理院住所検索・e-Stat 統計 API・国土数値情報（小学校区）・不動産情報ライブラリを 1 つの MCP でまとめて公開する。\n\n## Tools (7)\n\n| Tool | Description | Key required |\n|------|-------------|--------------|\n| `geocode_japan` | 住所 → 緯度経度（GSI 住所検索 API） | No |\n| `get_gsi_tile` | 地理院 XYZ タイル（std/pale/blank/aerial/vector）を base64 画像で取得 | No |\n| `list_data_sources` | アクセス可能な全データソース一覧と鍵要件 | No |\n| `get_estat_data` | e-Stat 統計データ取得（人口・人口動態・世帯 etc.） | `ESTAT_APP_ID` |\n| `get_estat_meta` | e-Stat 統計表メタ情報取得 | `ESTAT_APP_ID` |\n| `list_school_districts` | 全国小学校区 (A27) GML/GeoJSON ファイル一覧 | No |\n| `get_school_district_geojson` | 小学校区 GIS タイル (XKT004) GeoJSON 取得 | `REINFOLIB_API_KEY` |\n\n## 動作要件\n\n- Python >= 3.10、mcp>=1.30.0\n- 無料枠: GSI API（鍵不要）、e-Stat（APP_ID 必要）、不動産情報ライブラリ（API KEY 必要）\n- 完全ローカル実行（stdio）\n\n## 関連プロジェクト\n\n- Kensho: https://github.com/atushi1841/kensho\n- FOSS4G Hiroshima 2026 発表: Building an MCP Server Ecosystem on Japan National-Scale Geospatial Open Data Platform\n",
+  "author": {
+    "name": "atushi1841",
+    "url": "https://github.com/atushi1841"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atushi1841/japan-geospatial-open-data-mcp"
+  },
+  "homepage": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
+  "server": {
+    "type": "python",
+    "entry_point": "src/server.py",
+    "mcp_config": {
+      "command": "python3",
+      "args": [
+        "src/server.py"
+      ]
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "keywords": [
+    "japan",
+    "geospatial",
+    "gsi",
+    "e-stat",
+    "mlit",
+    "school-district",
+    "gis",
+    "mcp"
+  ],
+  "tools": []
+}
