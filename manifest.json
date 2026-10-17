@@ -2,7 +2,7 @@
   "manifest_version": "0.4",
   "name": "japan-geospatial-open-data-mcp",
   "display_name": "Japan Geospatial Open Data MCP",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Japan geospatial MCP: GSI tiles, e-Stat stats, MLIT school districts for real-estate analysis.",
   "long_description": "# japan-geospatial-open-data-mcp\n\n日本全国規模のジオスパティアル・オープンデータを AI エージェントに届ける MCP Server。\nGSI 地理院タイル・地理院住所検索・e-Stat 統計 API・国土数値情報（小学校区）・不動産情報ライブラリを 1 つの MCP でまとめて公開する。\n\n## Tools (7)\n\n| Tool | Description | Key required |\n|------|-------------|--------------|\n| `geocode_japan` | 住所 → 緯度経度（GSI 住所検索 API） | No |\n| `get_gsi_tile` | 地理院 XYZ タイル（std/pale/blank/aerial/vector）を base64 画像で取得 | No |\n| `list_data_sources` | アクセス可能な全データソース一覧と鍵要件 | No |\n| `get_estat_data` | e-Stat 統計データ取得（人口・人口動態・世帯 etc.） | `ESTAT_APP_ID` |\n| `get_estat_meta` | e-Stat 統計表メタ情報取得 | `ESTAT_APP_ID` |\n| `list_school_districts` | 全国小学校区 (A27) GML/GeoJSON ファイル一覧 | No |\n| `get_school_district_geojson` | 小学校区 GIS タイル (XKT004) GeoJSON 取得 | `REINFOLIB_API_KEY` |\n\n## 動作要件\n\n- Python >= 3.10、mcp>=1.30.0\n- 無料枠: GSI API（鍵不要）、e-Stat（APP_ID 必要）、不動産情報ライブラリ（API KEY 必要）\n- 完全ローカル実行（stdio）\n\n## 関連プロジェクト\n\n- Kensho: https://github.com/atushi1841/kensho\n- FOSS4G Hiroshima 2026 発表: Building an MCP Server Ecosystem on Japan National-Scale Geospatial Open Data Platform\n",
   "author": {
@@ -44,5 +44,85 @@
     "gis",
     "mcp"
   ],
-  "tools": []
+  "tools": [
+    {
+      "name": "geocode_japan",
+      "description": "Geocode a Japanese address to lat/lon using the official GSI address search API. Returns up to 10 candidate locations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "address": {"type": "string", "description": "Japanese address, e.g. '東京都渋谷区道玄坂'"}
+        },
+        "required": ["address"]
+      }
+    },
+    {
+      "name": "get_gsi_tile",
+      "description": "Fetch a GSI (Geospatial Information Authority) map tile as a base64 image. Keyless. Layers: std, pale, seamlessphoto, nendophoto2022-2024, optimal_bvmap, blank, english, gazo1/gazo4 (historic aerial). Returns tile URL plus a base64 image.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "layer": {"type": "string", "description": "Tile layer id (see description)"},
+          "lat": {"type": "number", "description": "Center latitude (WGS84)"},
+          "lon": {"type": "number", "description": "Center longitude (WGS84)"},
+          "z": {"type": "integer", "description": "Zoom level (2-18 depending on layer)"}
+        },
+        "required": ["layer", "lat", "lon", "z"]
+      }
+    },
+    {
+      "name": "list_data_sources",
+      "description": "List all open data sources this MCP server can access (GSI tiles/geocoder, e-Stat, MLIT national geographical info, MLIT real estate library) and which require API keys.",
+      "inputSchema": {"type": "object", "properties": {}}
+    },
+    {
+      "name": "get_estat_data",
+      "description": "Fetch statistics from Japan's e-Stat national statistics API (v3.0). Requires ESTAT_APP_ID env var (free registration). Known tables: population, population_age, vital_stats, household; or pass raw stats_data_id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table_key": {"type": "string", "description": "Known table key or omit"},
+          "stats_data_id": {"type": "string", "description": "Raw e-Stat stats table ID"},
+          "cd_cat01": {"type": "string", "description": "e-Stat narrowing code cat1, e.g. '#A03503'"},
+          "cd_cat02": {"type": "string", "description": "e-Stat narrowing code cat2"},
+          "cd_cat03": {"type": "string", "description": "e-Stat narrowing code cat3"}
+        }
+      }
+    },
+    {
+      "name": "get_estat_meta",
+      "description": "Fetch metadata (aggregation items, region items, classification items) for an e-Stat stats table. Requires ESTAT_APP_ID env var.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table_key": {"type": "string", "description": "Known table key or omit"},
+          "stats_data_id": {"type": "string", "description": "Raw e-Stat stats table ID"}
+        }
+      }
+    },
+    {
+      "name": "list_school_districts",
+      "description": "List nationwide school district (A27 Kokuto Suuchi Jhouhou) GML/GeoJSON files from nlftp.mlit.go.jp (MLIT National Geographical Information, keyless). Used for school-catchment real estate analysis.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "prefecture": {"type": "string", "description": "Optional prefecture code filter (e.g. 13 for Tokyo) - filters file names"}
+        }
+      }
+    },
+    {
+      "name": "get_school_district_geojson",
+      "description": "Fetch school district GIS tile (XKT004) from MLIT Real Estate Information Library as GeoJSON. Requires REINFOLIB_API_KEY env var (free application). Tile coords: z=11..15, x/y from XYZ tiling at that zoom.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "z": {"type": "integer", "description": "Zoom 11-15"},
+          "x": {"type": "integer", "description": "Tile X"},
+          "y": {"type": "integer", "description": "Tile Y"},
+          "administrative_area_code": {"type": "string", "description": "Optional 5-digit admin area code (e.g. 13105 for Shibuya) - comma-separate for multiple"}
+        },
+        "required": ["z", "x", "y"]
+      }
+    }
+  ]
 }
