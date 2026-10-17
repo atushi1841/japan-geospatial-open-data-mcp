@@ -1,0 +1,13 @@
+{
+  "name": "Japan Geospatial Open Data MCP",
+  "description": "Access to Japanese geospatial open data: GSI tiles, e-Stat school districts, MLIT land data for real estate analysis.",
+  "version": "1.0.0",
+  "sourceUrl": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
+  "repository": {
+    "url": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
+    "type": "github"
+  },
+  "transport": "stdio",
+  "iconUrl": null,
+  "configSchema": {}
+}
