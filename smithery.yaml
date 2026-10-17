@@ -1,0 +1,14 @@
+# Smithery.ai configuration for japan-geospatial-open-data-mcp
+description: "Access to Japanese geospatial open data: GSI geocoding/tiles, e-Stat statistics, MLIT school districts and land data for real-estate analysis."
+repositoryUrl: https://github.com/atushi1841/japan-geospatial-open-data-mcp
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+  commandFunction: |
+    (config) => ({
+      command: 'node',
+      args: ['${__dirname}/server.js']
+    })
+exampleConfig: {}
