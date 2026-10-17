@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.atushi1841/japan-geospatial-open-data-mcp",
-  "description": "MCP server for Japan's national geospatial open data: GSI geocoding & XYZ tiles (keyless), e-Stat statistics (optional ESTAT_APP_ID), MLIT school district GIS (keyless), MLIT Real Estate Information Library XKT004 (optional REINFOLIB_API_KEY). Covers real-estate school-zone analysis, education infrastructure, disaster planning, urban design.",
+  "description": "Japan geospatial MCP: GSI tiles, e-Stat, MLIT school districts for real-estate analysis.",
   "repository": {
     "url": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
     "source": "github"
