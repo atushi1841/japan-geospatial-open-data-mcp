@@ -9,9 +9,10 @@
   "version": "1.0.0",
   "packages": [
     {
-      "registryType": "npm",
-      "identifier": "@atushi1841/japan-geospatial-open-data-mcp",
+      "registryType": "mcpb",
+      "identifier": "https://github.com/atushi1841/japan-geospatial-open-data-mcp/releases/download/v1.0.0/japan-geospatial-open-data-mcp.mcpb",
       "version": "1.0.0",
+      "fileSha256": "d8dd357794126c32e0163f0bd59228383864837afdd3d417ccea0e7a5ccf4c2a",
       "transport": {
         "type": "stdio"
       },
