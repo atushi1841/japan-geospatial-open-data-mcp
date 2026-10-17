@@ -84,3 +84,9 @@ The `mcp-publisher` CLI (GitHub auth, `io.github.atushi1841/japan-geospatial-ope
 - e-Stat 250m mesh population for density analysis
 - 中学校区 (A28) listing
 - Bulk GeoJSON download helper for nlftp files (A27 prefecture-level GML)
+
+## Apify Store
+
+This MCP server is published as an Apify Actor: [japan-geospatial-open-data-mcp](https://apify.com/fruitful_quintessence/japan-geospatial-open-data-mcp).
+
+**Apify Store**: [atushi1841](https://apify.com/fruitful_quintessence)
