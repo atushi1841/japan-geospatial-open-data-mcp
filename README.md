@@ -90,3 +90,9 @@ The `mcp-publisher` CLI (GitHub auth, `io.github.atushi1841/japan-geospatial-ope
 This MCP server is published as an Apify Actor: [japan-geospatial-open-data-mcp](https://apify.com/fruitful_quintessence/japan-geospatial-open-data-mcp).
 
 **Apify Store**: [atushi1841](https://apify.com/fruitful_quintessence)
+
+---
+## Data & Store
+
+- **Apify Store:** https://apify.com/fruitful_quintessence
+- **Gumroad datasets:** https://atushi5.gumroad.com/l/kutuxe
