@@ -1,12 +1,12 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.atushi1841/japan-geospatial-open-data-mcp",
-  "description": "Japan geospatial MCP: GSI tiles, e-Stat, MLIT school districts for real-estate analysis.",
+  "description": "Japan geospatial MCP: GSI tiles, e-Stat, MLIT school districts for real-estate analysis.\n\n- **Apify Store**: https://apify.com/fruitful_quintessence\n- **Gumroad**: https://atushi5.gumroad.com/l/kutuxe",
   "repository": {
     "url": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packages": [
     {
       "registryType": "mcpb",
