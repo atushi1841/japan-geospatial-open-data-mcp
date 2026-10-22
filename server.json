@@ -6,7 +6,7 @@
     "url": "https://github.com/atushi1841/japan-geospatial-open-data-mcp",
     "source": "github"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "packages": [
     {
       "registryType": "mcpb",
